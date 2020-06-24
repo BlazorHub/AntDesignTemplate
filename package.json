@@ -1,0 +1,28 @@
+{
+    "name": "ant-design-blazor-pro",
+    "version": "0.1.0",
+    "private": true,
+    "description": "An out-of-box UI solution for enterprise applications",
+    "scripts": {
+        "gulp:pro": "gulp --gulpfile ./src/UI/gulpfile.js"
+    },
+    "dependencies": {
+        "antd": "4.3.4",
+        "react": "^16.8.6",
+        "react-dom": "^16.8.6"
+    },
+    "devDependencies": {
+        "gulp": "^4.0.2",
+        "gulp-clean-css": "^4.2.0",
+        "gulp-less": "^4.0.1",
+        "gulp-rename": "^2.0.0",
+        "gulp-sourcemaps": "^2.6.5",
+        "gulp-uglify": "^3.0.2",
+        "less-plugin-npm-import": "^2.1.0",
+        "husky": "^4.2.3",
+        "tsify": "^4.0.1",
+        "typescript": "^3.8.3",
+        "vinyl-buffer": "^1.0.1",
+        "vinyl-source-stream": "^2.0.0"
+    }
+}

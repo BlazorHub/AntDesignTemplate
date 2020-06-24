@@ -1,7 +1,7 @@
 @page "/fetchdata"
 @using Microsoft.AspNetCore.Authorization
-@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @using AntDesignTemplate.Shared
+@using System.Net.Http.Json
 @attribute [Authorize]
 @inject HttpClient Http
 
@@ -43,14 +43,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        try
-        {
-            forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("WeatherForecast");
-        }
-        catch (AccessTokenNotAvailableException exception)
-        {
-            exception.Redirect();
-        }
+        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("WeatherForecast");
     }
 
 }
