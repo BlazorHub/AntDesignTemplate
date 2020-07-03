@@ -1,20 +1,36 @@
-# Template of AntDesign Blazor
+﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
+// Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
-# AntDesignWasmHostedPwaOidc
- Blazor WebAssembly use AddOidcAuthentication() to call secured WebApis
-### 0.Oidc Server (eg. IdentityServer4 with abp)
-* https://localhost:5001
 
-### 1.Client (ie. this repo)
-* https://localhost:44326
-```
+using IdentityServer4.Models;
+using System.Collections.Generic;
+using IdentityModel;
+using IdentityServer4;
+
+namespace IdentityServer
+{
+    public static class Config
+    {
+        public static IEnumerable<IdentityResource> Ids =>
+            new IdentityResource[]
+            {
+                new IdentityResources.OpenId(),
+                new IdentityResources.Profile(), 
+            };
+
+        public static IEnumerable<ApiResource> Apis =>
+            new[]
+            {
+                new ApiResource("AntBlazorApp.ServerAPI", "Demo Api", new []{ JwtClaimTypes.Name, JwtClaimTypes.Email })
+            };
+
         public static IEnumerable<Client> Clients =>
             new[]
             {
                 new Client
                 {
                     ClientId = "antBlazorApp.Client",
-                    AllowedGrantTypes =   GrantTypes.Code ,
+                    AllowedGrantTypes =   GrantTypes.Implicit ,
 
                     ClientSecrets =
                     {
@@ -40,29 +56,7 @@
                         "https://localhost:44326/authentication/logout-callback"
                     }
                 },
-            }
-```
-### 2. AddOidcAuthentication
-```
-            builder.Services.AddOidcAuthentication(options =>
-            {
-                builder.Configuration.Bind("Oidc", options.ProviderOptions); 
-            });
-```
-appsettings.json
-```
-{
-  "Oidc": {
-    "Authority": "https://localhost:5001",
-    "ClientId": "antBlazorApp.Client",
-    "RedirectUri": "https://localhost:44326/authentication/login-callback",
-    "PostLogoutRedirectUri": "https://localhost:44326/authentication/logout-callback",
-    "ResponseType": "code",
-    "DefaultScopes": [
-      "openid",
-      "profile"
-    ]
-  } 
-}
-```
+            };
 
+    }
+}

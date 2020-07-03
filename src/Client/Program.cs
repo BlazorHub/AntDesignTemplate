@@ -6,6 +6,7 @@ using AntDesignTemplate.Client.Services;
 using AntDesignTemplate.Shared.Services;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace AntDesignTemplate.Client
@@ -24,7 +25,12 @@ namespace AntDesignTemplate.Client
             // Supply HttpClient instances that include access tokens when making requests to the server project
             builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("AntDesignTemplate.ServerAPI"));
 
-            builder.Services.AddApiAuthorization();
+            //builder.Services.AddApiAuthorization();
+            builder.Services.AddOidcAuthentication(options =>
+            {
+                builder.Configuration.Bind("Oidc", options.ProviderOptions); 
+            });
+
             builder.Services.AddAntDesign();
             builder.Services.AddScoped<ILoginService, LoginService>();
 
