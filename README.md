@@ -14,7 +14,7 @@
                 new Client
                 {
                     ClientId = "antBlazorApp.Client",
-                    AllowedGrantTypes =   GrantTypes.Code ,
+                    AllowedGrantTypes =   GrantTypes.Implicit ,
 
                     ClientSecrets =
                     {
@@ -57,7 +57,7 @@ appsettings.json
     "ClientId": "antBlazorApp.Client",
     "RedirectUri": "https://localhost:44326/authentication/login-callback",
     "PostLogoutRedirectUri": "https://localhost:44326/authentication/logout-callback",
-    "ResponseType": "code",
+    "ResponseType": "id_token token",
     "DefaultScopes": [
       "openid",
       "profile"
