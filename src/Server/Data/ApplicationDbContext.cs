@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace AntDesignTemplate.Server.Data
 {
+    
     public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
     {
         public ApplicationDbContext(
